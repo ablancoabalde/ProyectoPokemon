@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "621767146066",
+    "firebase_url": "https://intercambio-pokemon.firebaseio.com",
+    "project_id": "intercambio-pokemon",
+    "storage_bucket": "intercambio-pokemon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621767146066:android:ee7431045e5956e3",
+        "android_client_info": {
+          "package_name": "com.alberto.intercambio_pokemon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "621767146066-hl1ua0a8u2jegnv21h3ggcbdu2vsjqkq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPtt2cRpw3YnoP88wc43g9CMBGwrbBJGY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
