@@ -3,6 +3,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
+// Plugin para Firebase
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 28
@@ -32,6 +34,13 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     // Dependencias para el firebase
     implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
+    implementation 'com.google.firebase:firebase-database:16.0.5'
+    //Librería de FirebaseUI (para Base de Datos)
+    implementation 'com.firebaseui:firebase-ui-database:4.3.1'
+
+    implementation 'com.android.support:recyclerview-v7:+'
+
+
 }
-// Plugin para Firebase
-apply plugin: 'com.google.gms.google-services'
+
