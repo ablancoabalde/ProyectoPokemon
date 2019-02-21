@@ -1,5 +1,6 @@
 package com.alberto.intercambio_pokemon
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import com.google.firebase.database.*
 // Importar las funciones de los LOG
 import android.util.Log
+import android.view.View
+import android.widget.Button
 // Importar la función de llamar a los elementos del xml
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -25,7 +28,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 class MainActivity : AppCompatActivity() {
     // para filtrar los logs
-    val TAG = "AppCompatActivity"
+
 
     // // referencia a la base de datos del proyecto en firebase
     private var dbCielo: DatabaseReference? = FirebaseDatabase.getInstance().getReference()
@@ -38,9 +41,26 @@ class MainActivity : AppCompatActivity() {
 
     var mAdapter: FirebaseRecyclerAdapter<*, *>? = null
 
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        btn_entrar.setOnClickListener{
+            val interfaz = Intent(this, Interfaz::class.java)
+            Variables.cajaUsuario=txtUsuario.toString();
+            startActivity(interfaz)
+            finish()
+        }
+
+
+
+
+
+
+
 
         // Primer punto
         /*
@@ -110,3 +130,5 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
+
