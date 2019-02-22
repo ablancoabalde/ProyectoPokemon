@@ -19,7 +19,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center"
-            android:padding="16dp">
+            android:padding="16dp"
+    >
 
 
         <LinearLayout android:layout_width="match_parent"
@@ -41,7 +42,7 @@
 
 
         <TextView
-                android:layout_marginTop="340dp"
+                android:layout_marginTop="10dp"
                 android:text="Que Pokémon quieres cambiar?"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,10 +50,18 @@
                 android:textColor="@color/red"
                 android:textSize="16dp"/>
 
-        <EditText
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tilNPokemon"
+                android:layout_marginTop="280dp"
+                android:textColorHint="@color/red"
+                app:errorEnabled="true">
+
+        <android.support.design.widget.TextInputEditText
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:hint="Pokémon"
                 android:textColor="@color/red"
@@ -60,9 +69,18 @@
                 android:id="@+id/txtPokemon"
                 android:inputType="text"/>
 
-        <EditText
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tilCantidad"
+                android:textColorHint="@color/red"
+                app:errorEnabled="true">
+
+        <android.support.design.widget.TextInputEditText
                 android:layout_marginBottom="20dp"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:hint="Cantidad"
                 android:textColor="@color/red"
@@ -70,10 +88,13 @@
                 android:id="@+id/txtCantidad"
                 android:inputType="number"/>
 
+        </android.support.design.widget.TextInputLayout>
+
         <LinearLayout android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:orientation="vertical"
-                      android:gravity="end">
+                      android:gravity="end"
+                      android:layout_marginBottom="10dp">
 
             <Button
                     android:layout_width="50dp"
@@ -89,7 +110,7 @@
         <Button
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_entrar"
+                android:id="@+id/btn_enviar"
                 android:text="Enviar"
                 android:background="@drawable/btn_redondeado_red"
                 android:textColor="@color/white"

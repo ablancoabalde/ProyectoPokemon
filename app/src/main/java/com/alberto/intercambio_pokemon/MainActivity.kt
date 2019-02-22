@@ -20,6 +20,9 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.DatabaseReference
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import android.support.design.widget.TextInputLayout
+
+
 
 
 
@@ -31,16 +34,15 @@ class MainActivity : AppCompatActivity() {
 
 
     // // referencia a la base de datos del proyecto en firebase
-    private var dbCielo: DatabaseReference? = FirebaseDatabase.getInstance().getReference()
+  //  private var dbCielo: DatabaseReference? = FirebaseDatabase.getInstance().getReference()
 
-    private var eventListener: ValueEventListener? = null
+   // private var eventListener: ValueEventListener? = null
 
 
 
-    private val lstPredicciones: RecyclerView? = null
+   // private val lstPredicciones: RecyclerView? = null
 
-    var mAdapter: FirebaseRecyclerAdapter<*, *>? = null
-
+   // var mAdapter: FirebaseRecyclerAdapter<*, *>? = null
 
 
 
@@ -49,17 +51,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         btn_entrar.setOnClickListener{
-            val interfaz = Intent(this, Interfaz::class.java)
-            Variables.cajaUsuario=txtUsuario.toString();
-            startActivity(interfaz)
-            finish()
+            var MNombre =txtUsuario.text.toString().trim()
+            if(MNombre.isEmpty()){
+                validation(MNombre)
+
+            }else{
+                val interfaz = Intent(this, Interfaz::class.java)
+                Variables.cajaUsuario=txtUsuario.text.toString().trim()
+                startActivity(interfaz)
+                finish()
+            }
+
         }
-
-
-
-
-
-
 
 
         // Primer punto
@@ -126,6 +129,14 @@ class MainActivity : AppCompatActivity() {
 
 
 
+    }
+
+
+    private fun validation(Nombre : String ) {
+
+       if (Nombre.isEmpty()){
+           tilUsuario.setError("Required")
+       }
     }
 
 
