@@ -14,55 +14,43 @@ class ListasPokemon : AppCompatActivity() {
     // // referencia a la base de datos del proyecto en firebase
     private var fireDatabase= FirebaseDatabase.getInstance().getReference()
 
-    private var eventListener: ValueEventListener? = null
+    var arrayadapterPersona : ArrayAdapter<Persona>? = null
 
-    var listV_pokemon: ListView? = null
+    var listV_pokemon : ListView? = null
 
-    var LPersona: MutableList<Persona> = mutableListOf()
-  //  var arrayAdpterPersona: ArrayAdapter<Persona> = null
+    var lPersona: MutableList<Persona> = mutableListOf()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_listas_pokemon)
 
-
-        listV_pokemon = findViewById<ListView>(R.id.lv_datos)
-
-
         btn_return.setOnClickListener {
             val lPokemon = Intent(this, Interfaz::class.java)
             startActivity(lPokemon)
-
-            listarDatos()
-
         }
+
+        listV_pokemon = lv_datos
+
+        listarDatos()
 
     }
 
     private fun listarDatos() {
 
-        fireDatabase = FirebaseDatabase.getInstance().getReference("predicciones");
+        fireDatabase.child("Usuario").addValueEventListener(object : ValueEventListener{
 
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                lPersona.clear()
 
-
-        eventListener = (object : ValueEventListener {
-
-            /**
-             * Función que llamará automáticamente cada vez que se actualice
-             * la información del nodo actual o se produzca cualquier cambio en cualquiera de sus nodos descendientes
-             */
-
-            override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
-                LPersona.clear()
-
-                for (obj in dataSnapshot.children){
+                for (snapshot in dataSnapshot.children) {
                     var p = Persona()
-                     p = obj.value as Persona
-                    LPersona.add(p)
+                    p= snapshot.getValue(Persona::class.java)!!
+                    lPersona.add(p)
 
-                   // arrayAdpterPersona= ArrayAdapter<Persona>(this,R.layout.lv_datos,LPersona)
 
+                    arrayadapterPersona=ArrayAdapter<Persona>(this@ListasPokemon,android.R.layout.simple_list_item_1,lPersona)
+                    listV_pokemon!!.adapter=arrayadapterPersona
                 }
 
 
@@ -76,9 +64,6 @@ class ListasPokemon : AppCompatActivity() {
 
             }
         })
-        fireDatabase!!.addValueEventListener(eventListener as ValueEventListener);
-
-
     }
 }
 
