@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_interfaz.*
-import java.util.*
 
 
 class Interfaz : AppCompatActivity() {
@@ -29,7 +28,7 @@ class Interfaz : AppCompatActivity() {
         iNnombre= Variables.cajaUsuario
 
         btn_ver.setOnClickListener{
-            val lPokemon = Intent(this, ListasPokemon::class.java)
+            val lPokemon = Intent(this, ListaUsuarios::class.java)
             startActivity(lPokemon)
         }
 
@@ -40,9 +39,9 @@ class Interfaz : AppCompatActivity() {
         val childEventListener = object : ChildEventListener {
 
             override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
-
+                iArrayList.clear()
                 for (snapshot in dataSnapshot.child(iNnombre).child("arrayList").children) {
-                    iArrayList.clear()
+
                     var p:Pokemons= snapshot.getValue(Pokemons::class.java)!!
                     val pk = Pokemons()
                     pk.nombrePokemon=p.nombrePokemon
@@ -84,22 +83,28 @@ class Interfaz : AppCompatActivity() {
                             fireDatabase.child("Usuario").child(p.nombre).setValue(p)
                             limpiarCajas()
                         }
-                    }else{
-                        val p = Persona()
-                        p.nombre=iNnombre
-                        p.arrayList=iArrayList
-                        val pk = Pokemons()
-                        pk.nombrePokemon=iNomPokemon
-                        pk.cantidad=iCantidad
-                        iArrayList.add(pk)
-                        fireDatabase.child("Usuario").child(p.nombre).setValue(p)
-                        limpiarCajas()
+                    }else {
+                        if (iNomPokemon.isEmpty() || iCantidad.isEmpty()) {
+                            validation(iNomPokemon, iCantidad)
+                        } else {
+                            val p = Persona()
+                            p.nombre = iNnombre
+                            p.arrayList = iArrayList
+                            val pk = Pokemons()
+                            pk.nombrePokemon = iNomPokemon
+                            pk.cantidad = iCantidad
+                            iArrayList.add(pk)
+                            fireDatabase.child("Usuario").child(p.nombre).setValue(p)
+                            limpiarCajas()
+                        }
+
                     }
 
                 }
             }
 
             override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
+                /*
                 iArrayList.clear()
                 for (snapshot in dataSnapshot.child(iNnombre).child("arrayList").children) {
 
@@ -153,6 +158,7 @@ class Interfaz : AppCompatActivity() {
                     }
 
                 }
+                */
             }
 
             override fun onChildRemoved(dataSnapshot: DataSnapshot) {
@@ -182,11 +188,11 @@ class Interfaz : AppCompatActivity() {
         iCantidad = ""
     }
 
-    private fun validation(Nombre : String, Cantidad : String ) {
+    private fun validation(nombre : String, cantidad : String ) {
 
-        if (Nombre.isEmpty()){
+        if (nombre.equals("")|| nombre.isEmpty()){
             tilNPokemon.setError("Required")
-        }else if(Cantidad.isEmpty()){
+        }else if(cantidad.equals("")|| cantidad.isEmpty()){
             tilCantidad.setError("Required")
         }
     }

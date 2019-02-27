@@ -19,8 +19,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center"
-            android:padding="16dp"
-    >
+            android:padding="16dp">
 
 
         <LinearLayout android:layout_width="match_parent"
@@ -48,18 +47,18 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/lblInfo"
                 android:textColor="@color/red"
-                android:textSize="16dp"/>
+                android:textSize="16dp"        />
 
         <android.support.design.widget.TextInputLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tilNPokemon"
-                android:layout_marginTop="280dp"
+                android:layout_marginTop="265dp"
                 android:textColorHint="@color/red"
                 app:errorEnabled="true">
 
         <android.support.design.widget.TextInputEditText
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginBottom="20dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -67,7 +66,7 @@
                 android:textColor="@color/red"
                 android:textColorHint="@color/red"
                 android:id="@+id/txtPokemon"
-                android:inputType="text"/>
+                android:inputType="textCapWords"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -78,15 +77,15 @@
                 android:textColorHint="@color/red"
                 app:errorEnabled="true">
 
-        <android.support.design.widget.TextInputEditText
-                android:layout_marginBottom="20dp"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:hint="Cantidad"
-                android:textColor="@color/red"
-                android:textColorHint="@color/red"
-                android:id="@+id/txtCantidad"
-                android:inputType="number"/>
+            <android.support.design.widget.TextInputEditText
+                    android:layout_marginBottom="35dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Cantidad"
+                    android:textColor="@color/red"
+                    android:textColorHint="@color/red"
+                    android:id="@+id/txtCantidad"
+                    android:inputType="number"/>
 
         </android.support.design.widget.TextInputLayout>
 
