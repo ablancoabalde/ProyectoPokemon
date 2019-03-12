@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.google.firebase.database.*
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_interfaz.*
 
 
@@ -12,6 +13,7 @@ class Interfaz : AppCompatActivity() {
 
     val TAG = "AppCompatActivity"
 
+    private var FCMToken: String? = null
     // // referencia a la base de datos del proyecto en firebase
     private var fireDatabase= FirebaseDatabase.getInstance().getReference()
 
@@ -24,6 +26,8 @@ class Interfaz : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_interfaz)
+
+        FCMToken = FirebaseInstanceId.getInstance().token
 
         iNnombre= Variables.cajaUsuario
 
@@ -80,7 +84,7 @@ class Interfaz : AppCompatActivity() {
                             val p = Persona()
                             p.nombre=iNnombre
                             p.arrayList=iArrayList
-                            fireDatabase.child("Usuario").child(p.nombre).setValue(p)
+                            fireDatabase.child("Usuario").child(FCMToken.toString()).setValue(p)
                             limpiarCajas()
                         }
                     }else {
@@ -94,7 +98,7 @@ class Interfaz : AppCompatActivity() {
                             pk.nombrePokemon = iNomPokemon
                             pk.cantidad = iCantidad
                             iArrayList.add(pk)
-                            fireDatabase.child("Usuario").child(p.nombre).setValue(p)
+                            fireDatabase.child("Usuario").child(FCMToken.toString()).setValue(p)
                             limpiarCajas()
                         }
 

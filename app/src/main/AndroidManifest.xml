@@ -13,11 +13,11 @@
             android:theme="@style/AppTheme">
         <activity android:name=".ListaPokemons"
                   android:configChanges="orientation"
-                  android:screenOrientation="portrait">>
+                  android:screenOrientation="portrait">
         </activity>
         <activity android:name=".ListaUsuarios"
                   android:configChanges="orientation"
-                  android:screenOrientation="portrait">>
+                  android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".Interfaz"
