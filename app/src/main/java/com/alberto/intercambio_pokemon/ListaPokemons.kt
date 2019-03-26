@@ -14,43 +14,61 @@ import kotlinx.android.synthetic.main.activity_lista_usuarios.*
 
 class ListaPokemons : AppCompatActivity() {
 
-    // referencia a la base de datos del proyecto en firebase
+    // Referencia a la base de datos del proyecto en firebase
     private var fireDatabase= FirebaseDatabase.getInstance().getReference("Usuario")
 
-    var arrayadapterPokemons : ArrayAdapter<Pokemons>? = null
-
-    var listV_pokemon : ListView? = null
-
+    // Variables generales
     var lPokemons: MutableList<Pokemons> = mutableListOf()
+
+    // Para el formateo de la tabla de datos del xml
+    var arrayadapterPokemons : ArrayAdapter<Pokemons>? = null
+    var listV_pokemon : ListView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_pokemons)
 
+        // Botón que llama a la ventana ListaUsuarios
         btn_return.setOnClickListener {
             val lPokemon = Intent(this, ListaUsuarios::class.java)
             startActivity(lPokemon)
         }
 
+        // Introducimos el modelo de la lista de datos xml
         listV_pokemon = lv_datos
 
+        // Llamada al metodo listarDatos
         listarDatos()
 
     }
+
+    /**
+     * Metodo que lista los datos de los pokemons del usuario seleccionado
+     */
     private fun listarDatos() {
 
+        // Cursor de la base de datos
         fireDatabase.child(Variables.personaSeleccionada).addValueEventListener(object : ValueEventListener {
 
+            /**
+             * Metodo cada vez que se realice un cambio en la base de datos esta se actualiza
+             */
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Borramos la lista de Pokemons para que tras cada consulta no se dupliquen
                 lPokemons.clear()
 
+                // Hacemos un cursor en la base de datos para recoger el arraylist que contiene todos los pokemons
+                // con sus cantidades
                 for (snapshot in dataSnapshot.child("arrayList").children) {
+                    // Creamos un objeto pokemon
                     var p = Pokemons()
+                    //  Metemos el resultado de la consulta en una variable pokemon de la clase Pokemon
                     p= snapshot.getValue(Pokemons::class.java)!!
+                    // Agregamos a la MutableList la consulta pokemon
                     lPokemons.add(p)
-
-
+                    // Modelo para adaptar la consulta a la lista xml
                     arrayadapterPokemons=ArrayAdapter<Pokemons>(this@ListaPokemons,android.R.layout.simple_list_item_1,lPokemons)
+                    // Agregamos el modelo a la lista
                     listV_pokemon!!.adapter=arrayadapterPokemons
                 }
 

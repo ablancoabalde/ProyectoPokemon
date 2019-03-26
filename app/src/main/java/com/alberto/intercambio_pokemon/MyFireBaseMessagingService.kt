@@ -16,14 +16,15 @@ class MyFireBaseMessagingService: FirebaseMessagingService() {
 
 
     @SuppressLint("LongLogTag")
+    /**
+     * Metodo para habilitar la función de recibir notificaciones del firebase
+     */
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
+
         Log.d(TAG, "De donde llega: ${remoteMessage.from}")
         Log.d(TAG, "TEXTO: ${remoteMessage.notification}")
 
-
         val texto = remoteMessage.notification?.body
-
-
 
         if (remoteMessage.notification != null) {
             val titulo = remoteMessage.notification?.title
@@ -38,7 +39,7 @@ class MyFireBaseMessagingService: FirebaseMessagingService() {
     }
 
     private fun showNotification(title: String?, body: String?) {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, Interfaz::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent,
             PendingIntent.FLAG_ONE_SHOT)
